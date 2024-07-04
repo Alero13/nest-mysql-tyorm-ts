@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { GatosModule } from './gatos/gatos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RazasModule } from './razas/razas.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { RazasModule } from './razas/razas.module';
       synchronize: true
     }),
     GatosModule,
-    RazasModule
+    RazasModule,
+    UsuariosModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
