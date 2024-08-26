@@ -31,10 +31,17 @@ export class AuthService {
 
         /* return await this.usuarioService.create({nombre, email, contraseña}) */
 
-        return await this.usuarioService.create({
+        /* return await this.usuarioService.create({ */
+
+        await this.usuarioService.create({
             nombre, 
             email, 
             contraseña: await bcryptjs.hash(contraseña, 10)})
+
+        return {
+            nombre,
+            email,
+        }
     }
 
     /* login(loginDto: LoginDto) { */
@@ -53,12 +60,23 @@ export class AuthService {
             throw new UnauthorizedException('contraseña incorrecta')
         }
 
-        const payload = { email: usuario.email }
+        /* const payload = { email: usuario.email } */
+
+        const payload = { email: usuario.email, rol: usuario.rol }
 
         const token = await this.jwtService.signAsync(payload)
 
         /* return usuario */
 
         return { token, email }
+    }
+
+    async Perfil({email, rol} : { email:string, rol: string }) {
+
+        /* if(rol !=='administrador') {
+            throw new UnauthorizedException('No esta autorizado para usar esta seccion')
+        } */
+
+        return await this.usuarioService.findOneByEmail(email)
     }
 }
