@@ -23,11 +23,20 @@ export class UsuariosService {
     return this.usuarioRepository.findOneBy({ email })
   }
 
- /*  findAll() {
-    return `This action returns all usuarios`;
+  findOneByEmailWithPassword(email: string) {
+    return this.usuarioRepository.findOne({
+      where: { email },
+      select: ['id', 'nombre', 'email', 'contraseña', 'rol']
+    });
   }
 
-  findOne(id: number) {
+   findAll() {
+    /* return `This action returns all usuarios`; */
+
+    return this.usuarioRepository.find();
+  }
+
+  /* findOne(id: number) {
     return `This action returns a #${id} usuario`;
   }
 

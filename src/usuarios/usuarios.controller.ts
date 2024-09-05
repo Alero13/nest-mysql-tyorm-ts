@@ -2,6 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/roles.enum';
+
+@Auth(Role.ADMINISTRADOR)
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -12,12 +16,12 @@ export class UsuariosController {
     return this.usuariosService.create(createUsuarioDto);
   }
 
-  /* @Get()
+   @Get()
   findAll() {
     return this.usuariosService.findAll();
   }
 
-  @Get(':id')
+  /* @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usuariosService.findOne(+id);
   }

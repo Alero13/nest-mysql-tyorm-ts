@@ -2,7 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RazasService } from './razas.service';
 import { CreateRazaDto } from './dto/create-raza.dto';
 import { UpdateRazaDto } from './dto/update-raza.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/roles.enum';
 
+@Auth(Role.ADMINISTRADOR)
 @Controller('razas')
 export class RazasController {
   constructor(private readonly razasService: RazasService) {}

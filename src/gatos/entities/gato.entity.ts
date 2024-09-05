@@ -1,5 +1,6 @@
-import { Raza } from "src/razas/entities/raza.entity";
-import { Column, DeleteDateColumn, Entity, ManyToOne, } from "typeorm";
+import { Raza } from "../../razas/entities/raza.entity";
+import { Usuario } from "../../usuarios/entities/usuario.entity";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, } from "typeorm";
 
 @Entity()
 export class Gato {
@@ -27,4 +28,13 @@ export class Gato {
     /* raza_id: number */
 
     raza: Raza
+
+    @ManyToOne( () => Usuario )
+
+    @JoinColumn({ name: 'usuarioEmail', referencedColumnName: 'email'})
+    usuario: Usuario
+
+    @Column()
+    usuarioEmail: string
+
 }
